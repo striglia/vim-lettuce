@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+# Calls lettuce with no color (-v3) and strips lines caused by using lettuce to run tests from tracebacks
+lettuce -v3 2>&1 | awk -v nlines=1 '/site-packages\/lettuce\/core.py/ {for (i=0; i<nlines; i++) {getline}; next} 1'
